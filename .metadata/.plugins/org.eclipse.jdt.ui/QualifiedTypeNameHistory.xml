@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="MyText.boldText"/>
+<fullyQualifiedTypeName name="MyText.lengthOfText"/>
+<fullyQualifiedTypeName name="MyText.decor"/>
+<fullyQualifiedTypeName name="MyText.decor.charText"/>
+<fullyQualifiedTypeName name="studentRecords.yearComplete"/>
+<fullyQualifiedTypeName name="University.Jiangsu"/>
+<fullyQualifiedTypeName name="DBAbFactImplementationSec.deptFactory"/>
+<fullyQualifiedTypeName name="DBAbFactImplementationSec.FactoryProducer"/>
+<fullyQualifiedTypeName name="DBAbFactImplementationSec.AbstractFactory"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
+<fullyQualifiedTypeName name="java.awt.image.WritableRaster"/>
+<fullyQualifiedTypeName name="java.awt.image.DataBufferByte"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+</qualifiedTypeNameHistroy>
