@@ -16,7 +16,7 @@ public class University {
 
 	}
 
-	public class ASCHOOL implements School {
+	public class SWUST implements School {
 
 		public void ComputerScience() {
 			System.out.println("Computer Science and Control Systems available here.");
@@ -61,7 +61,7 @@ public class University {
 
 		School anotherDeptJ = univ.new infoEngineering(univ.new Jiangsu());
 
-		School anotherDeptS = univ.new infoEngineering(univ.new ASCHOOL());
+		School anotherDeptS = univ.new infoEngineering(univ.new SWUST());
 
 		System.out.println("A School with only one Course.");
 		js.ComputerScience();
@@ -69,7 +69,7 @@ public class University {
 		System.out.println("\n Another course on the way.");
 		anotherDeptJ.ComputerScience();
 
-		System.out.println("\n ASCHOOL now offering extra package");
+		System.out.println("\n SWUST now offering extra package");
 		anotherDeptS.ComputerScience();
 
 	}
