@@ -34,10 +34,10 @@ public class DBDemo {
 		      
 		       
 		      String sql = "INSERT INTO StudentBasicInfo " +
-		                   "VALUES (1, 'ODOOM', 'JUSTICE', '15681200226')";
+		                   "VALUES (1, 'JJ', 'JUSTICE', '112012')";
 		      stmt.executeUpdate(sql);
 		      sql = "INSERT INTO StudentBasicInfo " +
-		                   "VALUES(2, 'KWAME', 'ALEX', '15681200227')";
+		                   "VALUES(2, 'KJ', 'ALEX', '45215121')";
 		      stmt.executeUpdate(sql);
 		      System.out.println("Records inserted into the table StudentBasicInfo."); 
 		      

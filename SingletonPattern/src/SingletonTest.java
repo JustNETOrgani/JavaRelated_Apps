@@ -1,3 +1,4 @@
+//	This uses Singleton Design Pattern.
 
 public class SingletonTest {
 	

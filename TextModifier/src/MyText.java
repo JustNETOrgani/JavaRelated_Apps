@@ -1,3 +1,5 @@
+//	This uses Decorator Design pattern.
+
 import java.util.Scanner;
 
 public class MyText {

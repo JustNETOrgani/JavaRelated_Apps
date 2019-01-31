@@ -1,18 +1,20 @@
 import java.sql.*;
 
+//This uses Abstract Factory Design pattern.
+
 /*This code will do the following when run;
  * Create a new DB and Two tables.
  * Save data into the DB.
  * Load data from the DB.
  * 
  * Preconditions: 1. MySQL and JDBC connector/driver must be installed and running. 
- * 2. Servername should be localhost.
+ * 2. Server name should be localhost.
  */
 
 public class DBAbFactImplementationSec {
 	/*
 	 * Assignment to implement Abstract Factory usage in Database save and Load by
-	 * Prof. Chen. Consider the following; Main issue is that you have a DbTable in
+	 * Prof. CC. Consider the following; Main issue is that you have a Db in
 	 * which two tables exist: stds and Dept.
 	 */
 
@@ -56,9 +58,9 @@ public class DBAbFactImplementationSec {
 			// Data to be saved into the Database ----- Dynamic.
 
 			try {
-				String sql = "INSERT INTO StudentBasicInfo " + "VALUES (1, 'ODOOM', 'JUSTICE', '15681200226')";
+				String sql = "INSERT INTO StudentBasicInfo " + "VALUES (1, 'JJ', 'JUSTICE', '1245843')";
 				stmt.executeUpdate(sql);
-				sql = "INSERT INTO StudentBasicInfo " + "VALUES(2, 'KWAME', 'ALEX', '15681200227')";
+				sql = "INSERT INTO StudentBasicInfo " + "VALUES(2, 'MM', 'ALEX', '2365482')";
 				stmt.executeUpdate(sql);
 				
 				System.out.println("\n");
@@ -175,9 +177,9 @@ public class DBAbFactImplementationSec {
 			// Data to be saved into the Database ----- Dynamic.
 
 			try {
-				String sql = "INSERT INTO department " + "VALUES (1, 'Computer Science and Tech.', 'Prof. He')";
+				String sql = "INSERT INTO department " + "VALUES (1, 'Computer Science and Tech.', 'Prof. II')";
 				stmt.executeUpdate(sql);
-				sql = "INSERT INTO department " + "VALUES(2, 'Software Testing', 'Prof. Pan')";
+				sql = "INSERT INTO department " + "VALUES(2, 'Software Testing', 'Prof. PP')";
 				stmt.executeUpdate(sql);
 				
 				System.out.println("\n");

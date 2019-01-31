@@ -1,8 +1,10 @@
+//	This uses Decorator Design pattern.
+
 import java.util.Scanner;
 
 public class studentRecords {
 
-	// student records of made up of only First name, Surname and Entry date into
+	// student records is made up of only First name, Surname and Entry date into
 	// the College.
 
 	private static String firstname;

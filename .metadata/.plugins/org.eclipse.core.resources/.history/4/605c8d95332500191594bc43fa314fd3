@@ -1,0 +1,357 @@
+import java.sql.*;
+
+//This uses Abstract Factory Design pattern.
+
+/*This code will do the following when run;
+ * Create a new DB and Two tables.
+ * Save data into the DB.
+ * Load data from the DB.
+ * 
+ * Preconditions: 1. MySQL and JDBC connector/driver must be installed and running. 
+ * 2. Servername should be localhost.
+ */
+
+public class DBAbFactImplementationSec {
+	/*
+	 * Assignment to implement Abstract Factory usage in Database save and Load by
+	 * Prof. Chen. Consider the following; Main issue is that you have a DbTable in
+	 * which two tables exist: stds and Dept.
+	 */
+
+	// JDBC driver name and database URL
+	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.DRIVER";
+	static String DB_URL = "jdbc:mysql://localhost/";
+
+	// Database credentials begin.
+	static final String USER = "root";
+	static final String PWORD = "root";
+
+	Connection conn = null;
+
+	Statement stmt = null;
+	Statement stmt_2 = null;
+
+	// Database credentials end.
+
+	public interface students {
+		void saveData();
+
+		void loadData();
+
+		void connectToDB();
+	}
+
+	public interface department {
+		void saveData();
+
+		void loadData();
+
+		void connectToDB();
+	}
+
+	public class studentstbl implements students {
+		@Override
+		public void saveData() {
+			System.out.println("\n");
+			System.out.println("Data being saved inside students.");
+
+			// Data to be saved into the Database ----- Dynamic.
+
+			try {
+				String sql = "INSERT INTO StudentBasicInfo " + "VALUES (1, 'JJ', 'JUSTICE', '1245843')";
+				stmt.executeUpdate(sql);
+				sql = "INSERT INTO StudentBasicInfo " + "VALUES(2, 'MM', 'ALEX', '2365482')";
+				stmt.executeUpdate(sql);
+				
+				System.out.println("\n");
+				System.out.println("Records inserted into the table StudentBasicInfo.");
+			} catch (SQLException se) {
+				// Error handling for JDBC
+				se.printStackTrace();
+			}
+
+		}
+
+		public void loadData() {
+			System.out.println("\n");
+			System.out.println("Data now being loaded from students.");
+
+			// Data to be retrieved from the Database ----- Not static. Can change.
+
+			String sql = "SELECT Stdid, Surname, Firstname, PhoneNumber FROM StudentBasicInfo ";
+			try {
+				ResultSet dataset = stmt.executeQuery(sql);
+				// STEP 5: Get data from result set query.
+				while (dataset.next()) {
+					
+					// Retrieve by column name as created in the Database.
+
+					String ID 			= dataset.getString("Stdid");
+					String Surname 		= dataset.getString("Surname");
+					String Firstname 	= dataset.getString("Firstname");
+					String PhoneNumber 	= dataset.getString("PhoneNumber");
+
+					// Display values retrieved.
+					
+					System.out.print("\nStudent ID: " + ID);
+					System.out.print("\nSurname: " + Surname);
+					System.out.print(", First name: " + Firstname);
+					System.out.print(", Phone Number: " + PhoneNumber);
+
+					System.out.print("\n");
+				}
+				dataset.close();
+			} catch (SQLException se) {
+				// Error handling for JDBC
+				se.printStackTrace();
+			}
+
+		}
+
+		public void connectToDB() {
+			System.out.println("Now connecting to DB from students.");
+
+			try {
+				// Register JDBC driver
+				
+				Class.forName("com.mysql.jdbc.Driver");
+
+				// Open a connection
+				
+				System.out.println("Creating Database connection.");
+				conn = DriverManager.getConnection(DB_URL, USER, PWORD);
+
+				// Create the DB query.
+				
+				System.out.println("\nCreating database...");
+				stmt = conn.createStatement();
+
+				String sqlCreateDB = "CREATE DATABASE STUDENTS_DB";
+				stmt.executeUpdate(sqlCreateDB);
+				System.out.println("\nDatabase created successfully...");
+
+				DB_URL = "jdbc:mysql://localhost/STUDENTS_DB";
+				conn = DriverManager.getConnection(DB_URL, USER, PWORD);
+
+				// Create the StudentsBasicInfo table
+				System.out.println("\nCreating StudentsBasicInfo table in the created Database.");
+				stmt = conn.createStatement();
+
+				String sqlCreateTblstd = "CREATE TABLE StudentBasicInfo " + "(Stdid INTEGER not NULL, "
+						+ " Surname VARCHAR(30), " + " Firstname VARCHAR(30), " + " PhoneNumber VARCHAR(11), "
+						+ " PRIMARY KEY ( Stdid ))";
+
+				stmt.executeUpdate(sqlCreateTblstd);
+
+				// Create the Department table
+				System.out.println("\nCreating Department table in the created Database.");
+				stmt_2 = conn.createStatement();
+
+				String sqlCreateTbldpt = "CREATE TABLE Department" + "(Deptid INTEGER not NULL, "
+						+ " DeptName VARCHAR(50), " + " DeptHead VARCHAR(30), " + " PRIMARY KEY ( Deptid ))";
+
+				stmt_2.executeUpdate(sqlCreateTbldpt);
+
+			}
+
+			catch (SQLException se) {
+				// Handle errors for JDBC
+				se.printStackTrace();
+			} catch (Exception e) {
+				// This will take care of possible errors for Class.forName
+				e.printStackTrace();
+			}
+
+			System.out.println("\nDatabase and Tables created successfully. Xie xie.");
+
+		}
+
+	}
+
+	public class departmenttbl implements department {
+		@Override
+		public void saveData() {
+			System.out.println("\n");
+			System.out.println("Data being saved inside department.");
+
+			// Data to be saved into the Database ----- Dynamic.
+
+			try {
+				String sql = "INSERT INTO department " + "VALUES (1, 'Computer Science and Tech.', 'Prof. II')";
+				stmt.executeUpdate(sql);
+				sql = "INSERT INTO department " + "VALUES(2, 'Software Testing', 'Prof. PP')";
+				stmt.executeUpdate(sql);
+				
+				System.out.println("\n");
+				System.out.println("Records inserted into the table: department.");
+			} catch (SQLException se) {
+				// Error handling for JDBC
+				se.printStackTrace();
+			}
+
+		}
+
+		public void loadData() {
+			System.out.println("\n");
+			System.out.println("Data being loaded from department.");
+
+			// Data to be retrieved from the Database ----- Not static. Can change.
+
+			String sql = "SELECT Deptid, DeptName, DeptHead FROM department ";
+			try {
+				ResultSet dataset = stmt.executeQuery(sql);
+				// Get data from result set query.
+				while (dataset.next()) {
+					// Retrieve by column name as created in the Database.
+
+					String Deptid 	= 	dataset.getString("Deptid");
+					String DeptName = 	dataset.getString("DeptName");
+					String DeptHead = 	dataset.getString("DeptHead");
+
+					// Display values retrieved.
+					
+					System.out.print("\nDepartment ID: " + Deptid);
+					System.out.print("\nName of Department: " + DeptName);
+					System.out.print(", Head of Department: " + DeptHead);
+
+					System.out.print("\n");
+					
+					
+				}
+				System.out.print("\n");
+				System.out.println("Data retrieval all successfull. Z¨¤iji¨¤n.");
+				dataset.close();
+			} catch (SQLException se) {
+				// Error handling for JDBC
+				se.printStackTrace();
+			}
+
+		}
+
+		public void connectToDB() {
+			System.out.println("Now connecting to DB from department.");
+			
+			//	This though is duplication can be implemented to take other Databases to show the Abstract Factory pattern usage.
+			
+			try {
+				// Register JDBC driver
+				Class.forName("com.mysql.jdbc.Driver");
+
+				// Open a connection
+				System.out.println("\n");
+				System.out.println("Creating Database connection");
+				conn = DriverManager.getConnection(DB_URL, USER, PWORD);
+
+				// Create the DB query.
+				
+				stmt = conn.createStatement();
+			} catch (SQLException se) {
+				// Error handling for JDBC
+				se.printStackTrace();
+			} catch (Exception e) {
+				// Takes care of errors for Class.forName
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public abstract class AbstractFactory {
+		abstract students getStd_table(String studentstbl);
+
+		abstract department getDept_table(String departmenttbl);
+
+	}
+
+	public class stdFactory extends AbstractFactory {
+
+		@Override
+		public students getStd_table(String tblsType) {
+
+			if (tblsType == null) {
+				return null;
+			} else if (tblsType.contains("students")) {
+				return new studentstbl();
+
+			}
+
+			return null;
+		}
+
+		@Override
+		departmenttbl getDept_table(String departmenttbl) {
+			return null;
+		}
+
+	}
+
+	public class deptFactory extends AbstractFactory {
+
+		@Override
+		public students getStd_table(String tblsType) {
+			return null;
+		}
+
+		@Override
+		department getDept_table(String tbldType) {
+
+			if (tbldType == null) {
+				return null;
+			}
+
+			else if (tbldType.contains("department")) {
+				return new departmenttbl();
+
+			}
+
+			return null;
+		}
+	}
+
+	public static class FactoryProducer {
+
+		public static AbstractFactory getFactoryType(String option) {
+
+			DBAbFactImplementationSec dbafact = new DBAbFactImplementationSec();
+
+			if (option.contains("students")) {
+
+				return dbafact.new stdFactory();
+
+			} else if (option.contains("department")) {
+				return dbafact.new deptFactory();
+
+			}
+
+			return null;
+		}
+
+	}
+
+	public static void main(String[] args) {
+
+		AbstractFactory stdFactory = FactoryProducer.getFactoryType("students");
+
+		students stds = stdFactory.getStd_table("studentstbl");
+
+		AbstractFactory dptFactory = FactoryProducer.getFactoryType("department");
+
+		department dpt = dptFactory.getDept_table("departmenttbl");
+
+		// Call connectToDB, saveData and loadData methods from students table of the DB.
+		
+		stds.connectToDB();
+		stds.saveData();
+		stds.loadData();
+
+		// Creating a gap just for readability.
+		System.out.println("\n");
+		
+		// Call connectToDB, saveData and loadData methods from department table of the DB.
+		
+		dpt.connectToDB();
+		dpt.saveData();
+		dpt.loadData();
+
+	}
+
+}

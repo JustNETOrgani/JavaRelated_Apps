@@ -1,5 +1,7 @@
 // This file can be used if the following conditions are met.
 //  Path to the BMP image is set to "C:\\Images\\InfoSecPic.bmp" or be edited from Line 77.
+//	This is an ongoing application.
+//	It is to hide information in a picture. Help would be welcomed.
 
 import java.io.File;
 import java.io.FileInputStream;
